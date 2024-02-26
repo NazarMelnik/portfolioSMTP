@@ -21,12 +21,12 @@ app.post("/sendMessage", async (req, res) => {
             pass: process.env.SMTP_PASS
         }
     });
-    const { name, phone, email, message } = req.body;
+
     try {
         const mailOptions = {
             from: process.env.SMTP_EMAIL,
             to: process.env.SMTP_EMAIL,
-            html: require('./template/sender')(name, phone, email, message)
+            html: require('./template/sender')(req.body)
         };
         transporter.sendMail(mailOptions);
         res.status(200).json({ message: 'Email sent successfully' });
