@@ -1,10 +1,13 @@
 const express = require('express');
 const nodeMailer = require('nodemailer');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(bodyParser.urlencoded({ extended: true, limit: 20000000 }));
+app.use(bodyParser.json( { limit: 20000000 } ));
 app.use(express.json());
 app.use(cors());
 
